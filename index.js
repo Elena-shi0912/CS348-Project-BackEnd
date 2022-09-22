@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
 
@@ -9,11 +11,19 @@ const db = mysql.createPool({
     database: 'CS348_Project',
 })
 
-app.get("/", (req, res) => {
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended : true}));
+
+app.post("/api/insert", (req, res) => {
+    res.send("hello to backend world");
+    const userName = req.body.userName;
+    const userEmail = req.body.userEmail;
+
     const sqlInsert = 
-        "INSERT INTO userInfo (userName, userEmail) VALUES ('Elena', 'shiyunyi2002@outlook.com');";
-    db.query(sqlInsert, (err, result) => {
-        res.send("Hello to the server world, Elena!");
+        "INSERT INTO userInfo (userName, userEmail) VALUES (?,?);";
+    db.query(sqlInsert, [userName, userEmail], (err, result) => {
+        console.log(err);
     });
 });
 
