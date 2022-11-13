@@ -68,7 +68,6 @@ CREATE TABLE IF NOT EXISTS `Review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE DEFINER = CURRENT_USER TRIGGER `test`.`Review_AFTER_INSERT` AFTER INSERT ON `Review` FOR EACH ROW
-BEGIN
 	UPDATE DriverProfile
     SET rating = (
 		SELECT AVG(rating)
@@ -76,5 +75,4 @@ BEGIN
         GROUP BY driver_email
         HAVING driver_email = email
     )
-END;
 
