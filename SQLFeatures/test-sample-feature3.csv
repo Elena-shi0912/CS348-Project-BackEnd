@@ -1,8 +1,0 @@
-post_id,car_id,pickup_location,dropoff_location,pickup_date,pickup_time,seats_available,price_per_seat,additional_info
-2fd26aea-4f56-11ed-bdc3-0242ac120002,40c8718f-b33c-44a6-9f29-480bfd4166d3,Mississuaga,Kitchener,2022-10-13,17:30:00,2,15,"Each people can take at most 1 luggage with no extra pay"
-65c09168-4f56-11ed-bdc3-0242ac120002,f8dead2d-d6ca-43ac-b23f-939a61606800,Vaughan,Waterloo,2022-10-19,07:00:00,3,18,"Wait for passenger at pick-up location for more than 15 minutes will cause extra charges"
-65c0951e-4f56-11ed-bdc3-0242ac120002,f8dead2d-d6ca-43ac-b23f-939a61606800,Waterloo,Vaughan,2022-10-19,16:30:00,3,18,NULL
-2fd268f6-4f56-11ed-bdc3-0242ac120002,854b601e-798f-424d-b431-55ea0566d18c,Toronto,Kitchener,2022-10-12,17:30:00,3,19,"Pet is not allowed"
-2fd26dba-4f56-11ed-bdc3-0242ac120002,fa0f2a21-2b3f-4532-b862-f74b5eae28b8,Toronto,Kitchener,2022-10-11,21:00:00,3,19,NULL
-2fd26c84-4f56-11ed-bdc3-0242ac120002,fa0f2a21-2b3f-4532-b862-f74b5eae28b8,Toronto,Waterloo,2022-10-11,18:00:00,6,20,"Each people can take at most 2 luggages with certain amount of extra fees"
-2fd264f0-4f56-11ed-bdc3-0242ac120002,9a255cef-fec5-4c59-b2d1-26fb1bc0c538,Waterloo,Scarborough,2022-10-11,23:30:00,4,21,NULL
