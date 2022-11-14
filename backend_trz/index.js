@@ -8,6 +8,8 @@ const mysql = require('mysql');
 // } = require('uuid');
 const { emit } = require('nodemon');
 const cors = require('cors');
+let currentUser = false; // true if current user is a driver
+let currentUserEmail = "";
 
 
 const db = mysql.createConnection({
@@ -56,8 +58,14 @@ app.post("/api/insert", (req, res) => {
 app.get("/api/check", (req, res) => {
   //const email = req.body.userEmail;
   //const password = req.body.password;
+  const sqlCheckDriver = "SELECT isDriver FROM user WHERE email = (?);";
   const email = "1";
   const password = "123456";
+  currentUserEmail = email;
+  db.query(sqlCheckDriver, [email], (err, result) => {
+    currentUser = result[0].isDriver;
+    //console.log(currentUserEmail);
+  });
   const sqlCheck = "SELECT COUNT(*) AS userCount FROM user WHERE email = (?) AND password = (?);";
   db.query(sqlCheck, [email, password], (err, result) => {
     if (result[0].userCount == 1) {
@@ -65,8 +73,30 @@ app.get("/api/check", (req, res) => {
     } else {
       res.send(false);
     }
-  })
-})
+  });
+});
+
+// display posts
+app.get("api/dbinfo", (req, res) => {
+  const postInfo = "I need post";
+  //const info = req.body.info;
+  const info = postInfo;
+  // send posting information
+  if (info == postInfo) {
+    // check if current user is a driver
+    if (currentUser) {
+      const sqlGetPost = "SELECT * FROM posting NATURAL JOIN ProvideCarpool WHERE email = ?;";
+      db.query(sqlGetPost, [currentUserEmail], (err, result) => {
+        res.send(result);
+      });
+    } else {
+      const sqlGetPost = "SELECT * FROM posting;"
+      db.query(sqlGetPost, (err, result) => {
+        res.send(result);
+      });
+    }
+  }
+});
 
 app.listen(3001, () => {
   console.log("running on port 3001");
