@@ -1,8 +1,8 @@
 -- insert 2 users to user table
 INSERT INTO User values('y345shi@uwaterloo.ca', 'password', 0);
-INSERT INTO UserProfile values('y345shi@uwaterloo.ca', 'Elena', 5483337498)
+INSERT INTO UserProfile values('y345shi@uwaterloo.ca', 'Elena', 5483337498);
 INSERT INTO User values('kwshi@uwaterloo.ca', 'password1', 1);
-INSERT INTO UserProfile values('kwshi@uwaterloo.ca', 'Kai', 5421097498)
+INSERT INTO UserProfile values('kwshi@uwaterloo.ca', 'Kai', 5421097498);
 
 -- filter pick up location
 SELECT * FROM posting WHERE pickup_location='Waterloo';
@@ -18,7 +18,7 @@ WHERE post_id = '2fd264f0-4f56-11ed-bdc3-0242ac120002';
 -- Driver can craete and view his/her own posts
 SELECT * FROM ProvideCarpool, Posting
 WHERE email = 'wangkai920601@gmail.com' and
-      ProvideCarpool.posting_id = Posting.posting_id;
+      ProvideCarpool.post_id = Posting.post_id;
 
 INSERT INTO ProvideCarpool values('wangkai920601@gmail.com', '6fa010ea-6398-11ed-81ce-0242ac120002');
 INSERT INTO Posting values ('6fa010ea-6398-11ed-81ce-0242ac120002', 'Waterloo', 'Toronto',
