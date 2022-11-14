@@ -73,7 +73,9 @@ FOR EACH ROW
         WHERE driver_email = DriverProfile.email
         GROUP BY driver_email
     )
-    WHERE NEW.driver_email = email
+    WHERE NEW.driver_email = email;
+
+-- NOTE: these 2 triggers should be run AFTER production data is loaded into the table
 
 CREATE DEFINER = CURRENT_USER TRIGGER `carpool`.`Reservation_AFTER_INSERT` AFTER INSERT ON `Reservation`
 FOR EACH ROW
