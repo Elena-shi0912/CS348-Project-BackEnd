@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `test`;
-USE `test`;
+CREATE DATABASE IF NOT EXISTS `carool`;
+USE `carpool`;
 
 CREATE TABLE IF NOT EXISTS `User` (
   `email` varchar(40) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `Posting` (
 
 CREATE TABLE IF NOT EXISTS `ProvideCarpool` (
   `email` varchar(40) NOT NULL REFERENCES `DriverProfile` (`email`),
-  `post_id` varchar(45) NOT NULL,
+  `post_id` varchar(36) NOT NULL,
   PRIMARY KEY (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `Review` (
   CONSTRAINT `review_chk_1` CHECK (((`rating` <= 5) and (`rating` >= 0)))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE DEFINER = CURRENT_USER TRIGGER `test`.`Review_AFTER_INSERT` AFTER INSERT ON `Review` 
+CREATE DEFINER = CURRENT_USER TRIGGER `carpool`.`Review_AFTER_INSERT` AFTER INSERT ON `Review` 
 FOR EACH ROW
 	UPDATE DriverProfile
     SET rating = (
@@ -74,3 +74,11 @@ FOR EACH ROW
         GROUP BY driver_email
     )
     WHERE NEW.driver_email = email
+
+CREATE DEFINER = CURRENT_USER TRIGGER `carpool`.`Reservation_AFTER_INSERT` AFTER INSERT ON `Reservation`
+FOR EACH ROW
+UPDATE Posting SET available_seats = available_seats - 1  WHERE NEW.posting_id = post_id;
+
+CREATE DEFINER = CURRENT_USER TRIGGER `carpool`.`Reservation_AFTER_DELETE` AFTER DELETE ON `Reservation`
+FOR EACH ROW
+UPDATE Posting SET available_seats = available_seats + 1  WHERE OLD.posting_id = post_id;
