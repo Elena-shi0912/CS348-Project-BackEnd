@@ -2,7 +2,7 @@
 INSERT INTO User values('y345shi@uwaterloo.ca', 'password', 0);
 INSERT INTO UserProfile values('y345shi@uwaterloo.ca', 'Elena', 5483337498);
 INSERT INTO User values('kwshi@uwaterloo.ca', 'password1', 1);
-INSERT INTO UserProfile values('kwshi@uwaterloo.ca', 'Kai', 5421097498);
+INSERT INTO DriverProfile values('kwshi@uwaterloo.ca', 'Kai', 5421097498);
 
 -- filter pick up location
 SELECT * FROM posting WHERE pickup_location='Waterloo';
