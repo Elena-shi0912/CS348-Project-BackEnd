@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Posting` (
   `pickup_location` varchar(45) NOT NULL,
   `dropoff_location` varchar(45) NOT NULL,
   `pickup_time` datetime NOT NULL,
-  `available_seats` varchar(45) NOT NULL DEFAULT '4',
+  `available_seats` int NOT NULL DEFAULT '4',
   `price_per_seat` int NOT NULL,
   `additional_info` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`post_id`)

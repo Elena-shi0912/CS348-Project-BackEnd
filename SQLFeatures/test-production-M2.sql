@@ -2,7 +2,7 @@
 INSERT INTO User values('y345shi@uwaterloo.ca', 'password', 0);
 INSERT INTO UserProfile values('y345shi@uwaterloo.ca', 'Elena', 5483337498);
 INSERT INTO User values('kwshi@uwaterloo.ca', 'password1', 1);
-INSERT INTO UserProfile values('kwshi@uwaterloo.ca', 'Kai', 5421097498);
+INSERT INTO DriverProfile values('kwshi@uwaterloo.ca', 'Kai', 5421097498);
 
 -- View if account is created successfully
 SELECT * FROM User, UserProfile 
