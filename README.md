@@ -1,13 +1,29 @@
 # CS348-Project-BackEnd
-## How to create and load sample database
-Please run the sql script _DatabaseStructure.sql_ to create tables and then import data from _carInfo.csv, DriverInfo.csv, PostInfo.csv, Review.csv_, and _UserInfo.csv_ files.
 
-1. How to create and load sample database?
-Step 1: Set up MySQL properly on your local machine
+## How to create database
+With mySQL installed and running, open mysql workbench, copy the content inside createTables.sql into a query file
+running the create to generate all tables
+[NOTE: you need to comment the last 2 triggers in the sql file first]
 
-Step 2: Run DatabaseStructure.sql to create and populate tables for the database with sample data (the five csv files in sample data dir contain the sample data for each table)
+## How to load sample database
+Step1: Download all CSV files under folder Sample_Data_M2 and also populate_sample_data.sql
 
-2. How to run the working database-driven application?
+Step2: Change the file location of each CSV file in populate_sample_data.sql to the location in your computer
+
+Step3: With mySQL running, enter the command 'source location-of-populate_sample_data.sql' to populate the sample data into tables
+
+Step4: Run the comment out 2 triggers now
+
+## How to get and load production data
+Step1: Download the production_data_v2.py under folder Production_Data
+
+Step2: Run the python script to automatically generate CSV file for each table
+
+Step3: Down populate_database.sql under Production_Data folder and follow the same step as sample data to populate production data
+
+Step4: Rerun the 2 triggers (if you did not run them after populating sample data)
+
+## How to run the working database-driven application?
 
 Pre-requisite: You have NodeJS set up properly
 Step 1: Create the directory (named as carpool here) for workspace
@@ -18,15 +34,13 @@ Step 4: In client dir, run npm start [start the backend server]
 Step 5: You are free to use the application web page now!
 
 
-3. What feature it currently supports?
-   a) Register User Name and User Password from web page
-   b) The submitted Name and Password will be added to the corresponding UserInfo table in the backend
-   c) Create five necessary tables for the database through backend
+# What feature is currently supported?
+   a) Create User Account in Sign Up page and insert into User and User/DriverProfile tables
+   b) Log in using registered Email and Password (performing check on email and possword)
+   c) User can view all the postings 
+   d) Driver can only view his/her own posting
+   e) Driver can update the number of available seats in his/her own posting
+   f) User can view his/her own profile
+   g) User can make an reservation on the posting and the available seats of the corresponding posting will be decreased
 
-   SQL queries for following four features:
-       1) Create User Account => insert into user table
-       2) Filter based on Origin => Select from Carpool Posting table
-       3) Sort carpool posts based on Price
-       4) Update Seats Available in Carpool Post with existing data
-
-    Note: The SQL queries and expected output for each feature is in SQLFeatures folder
+All the features is implemented in index.js file in Backend repo
