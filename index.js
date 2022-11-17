@@ -71,13 +71,16 @@ app.post("/api/check", (req, res) => {
 });
 
 // display posts
-app.post("api/dbinfo", (req, res) => {
-  const info = req.body.info;
-  console.log("Here");
+app.get("/api/dbinfo", (req, res) => {
+  //const info = req.body.info;
+  ///
+  //info = "I need post";
+  //currentUser = true;
+  ///
+  //console.log("Here");
   // send posting information
-  if (info == "I need post") {
+  //if (info == "I need post") {
     // check if current user is a driver
-    console.log("Here");
     if (currentUser) {
       console.log("Driver");
       const sqlGetPost = "SELECT * FROM posting NATURAL JOIN ProvideCarpool WHERE email = ?;";
@@ -91,7 +94,7 @@ app.post("api/dbinfo", (req, res) => {
         res.send(result);
       });
     }
-  }
+  //}
 });
 
 app.listen(3001, () => {
