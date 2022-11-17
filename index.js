@@ -2,10 +2,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
-// const { 
-//   v1: uuidv1,
-//   v4: uuidv4,
-// } = require('uuid');
+const uuid = require('uuid')
 const { emit } = require('nodemon');
 const cors = require('cors');
 let currentUser = 1 ; // true if current user is a driver
@@ -44,7 +41,7 @@ app.post("/api/insert", (req, res) => {
   const isDriver = req.body.isDriver;
   const sqlinsert = "INSERT INTO user values(?,?,?);";
   db.query(sqlinsert,[email, password, isDriver], (err, result)=> {
-    res.send("success insert!");
+    res.send("successful insert!");
    });
 });
 
@@ -96,6 +93,54 @@ app.get("/api/dbinfo", (req, res) => {
     }
   //}
 });
+
+// display user information
+app.get("/api/accountinfo", (req, res) => {
+    //const email = currentUserEmail;
+    const email = "Eason@gmail.com"; //
+    if (currentUser) {
+      console.log("Driver");
+      const sqlGetPost = "SELECT * FROM user NATURAL JOIN driverprofile WHERE email = ?;";
+      db.query(sqlGetPost, [email], (err, result) => {
+        res.send(result);
+      });
+    } else {
+      console.log("Not Driver");
+      const sqlGetPost = "SELECT * FROM user NATURAL JOIN userprofile WHERE email = ?;";
+      db.query(sqlGetPost, [cemail], (err, result) => {
+        res.send(result);
+      });
+    }
+  //}
+});
+
+// Update seats available in posting
+app.post("/api/updateseats", (req, res) => {
+  const post_id = req.body.post_id;
+  const available_seats = req.body.available_seats;
+  const sqlupdate = "UPDATE posting SET available_seats = ? WHERE post_id = ?;";
+  db.query(sqlupdate,[available_seats, post_id], (err, result)=> {
+    res.send("successful update!");
+   });
+});
+
+
+// make reservations
+app.post("/api/reserve", (req, res) => {
+  // const currentUser = false; //!
+  // const currentUserEmail = "y2797che@uwaterloo.ca"; //
+  if (currentUser == false){ // Current user can make reservation if one is not a driver
+    const post_id = req.body.post_id;
+    //const post_id = "2fd268f6-4f56-11ed-bdc3-0242ac120002";
+    const sqlinsert = "INSERT INTO reservation values(?,?,?);";
+    const random_id = uuid.v4();
+    db.query(sqlinsert,[random_id, post_id, currentUserEmail], (err, result)=> {
+      res.send("successful reservation!");
+      console.log("success");
+    });
+  }
+});
+
 
 app.listen(3001, () => {
   console.log("running on port 3001");
