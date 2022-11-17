@@ -25,14 +25,6 @@ db.connect(function(err) {
   console.log("Connected!");
 });
 
-app.post('/api/g', (req, res)=> {
-  const sqlSelect = "SELECT * FROM user";
-  db.query(sqlSelect, (err, result) => {
-    //console.log(result);
-    res.send(result);
-  })
-});
-
 
 // create account, insert to user table
 app.post("/api/insert", (req, res) => {
