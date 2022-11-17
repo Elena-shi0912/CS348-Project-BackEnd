@@ -107,7 +107,7 @@ app.get("/api/accountinfo", (req, res) => {
     } else {
       console.log("Not Driver");
       const sqlGetPost = "SELECT * FROM user NATURAL JOIN userprofile WHERE email = ?;";
-      db.query(sqlGetPost, [cemail], (err, result) => {
+      db.query(sqlGetPost, [email], (err, result) => {
         res.send(result);
       });
     }
