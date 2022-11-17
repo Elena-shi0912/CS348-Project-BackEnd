@@ -12,7 +12,7 @@ let currentUserEmail = "";
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'idiot$123',
+    password: '20020912@Syy',
     database: 'carpool',
 });
 
@@ -39,10 +39,23 @@ app.post("/api/insert", (req, res) => {
   const email = req.body.userEmail;
   const password = req.body.password;
   const isDriver = req.body.isDriver;
+  const name = req.body.userName;
+  const phone = req.body.phoneNumber;
   const sqlinsert = "INSERT INTO user values(?,?,?);";
   db.query(sqlinsert,[email, password, isDriver], (err, result)=> {
     res.send("successful insert!");
    });
+  if (isDriver == false) {
+    const sqlinsert_user = "INSERT INTO UserProfile values(?,?,?)";
+    db.query(sqlinsert_user, [email, name, phone], (err, result)=> {
+      console.log("create User Profile successfully!");
+    });
+  } else {
+    const sqlinsert_user = "INSERT INTO DriverProfile values(?,?,?,?)";
+    db.query(sqlinsert_user, [email, name, phone, 0], (err, result)=> {
+      console.log("create Driver Profile successfully!");
+    });
+  }
 });
 
 // log in, check if password correct
